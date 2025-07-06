@@ -72,6 +72,9 @@ if (document.getElementById('compounds-table')) {
           { field: 'is_vpvb', headerName: 'Very persistent and very bioaccumulative' },
           { field: 'is_pmt', headerName: 'Persistent, mobile and toxic' },
           { field: 'is_vpvm', headerName: 'Very persistent and very mobile' },
+		  { field: 'hStatement', headerName: 'Hazard statements' },
+		  { field: 'pStatement', headerName: 'Precautionary statements' },
+		  { field: 'euhStatement', headerName: 'EU Hazard statements' },
           { field: 'id', type: 'numericColumn' },
       ]);
 

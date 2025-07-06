@@ -129,6 +129,9 @@ final class CompoundsCsv extends AbstractCsv
                         isPmt: (bool) ($row['is_pmt'] ?? false),
                         isVpvb: (bool) ($row['is_vpvb'] ?? false),
                         isVpvm: (bool) ($row['is_vpvm'] ?? false),
+						hStatement: $row['hStatement'] ?? null,
+						pStatement: $row['pStatement'] ?? null,
+						euhStatement: $row['euhStatement'] ?? null,
                     );
                 }
 

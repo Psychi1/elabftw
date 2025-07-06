@@ -281,6 +281,9 @@ final class Compounds extends AbstractRest
         bool $isPmt = false,
         bool $isVpvb = false,
         bool $isVpvm = false,
+		?string $hStatement = null,
+		?string $pStatement = null,
+		?string $euhStatement = null,
     ): int {
         $compoundData = array(
             'inchi' => $inchi,
@@ -333,6 +336,9 @@ final class Compounds extends AbstractRest
             'is_pmt' => $isPmt,
             'is_vpvb' => $isVpvb,
             'is_vpvm' => $isVpvm,
+			'hStatement' = $hStatement,
+		    'pStatement' => $pStatement,
+		    'euhStatement' => $euhStatement,
         );
 
         $sql = 'INSERT INTO compounds (
@@ -341,13 +347,13 @@ final class Compounds extends AbstractRest
             smiles, molecular_formula, molecular_weight, metabolomics_wb_id, nci_code, nikkaji_number, pharmgkb_id, pharos_ligand_id, rxcui, unii, wikidata, wikipedia, is_radioactive, is_antibiotic, is_antibiotic_precursor, is_drug, is_drug_precursor, is_explosive_precursor, is_cmr, is_nano, is_controlled,
             cas_number, ec_number, iupac_name, pubchem_cid, userid, team, chebi_id, chembl_id, dea_number, drugbank_id, dsstox_id, hmdb_id, kegg_id,
             is_corrosive, is_serious_health_hazard, is_explosive, is_flammable, is_gas_under_pressure, is_hazardous2env, is_hazardous2health, is_oxidising, is_toxic,
-            is_ed2health, is_ed2env, is_pbt, is_vpvb, is_pmt, is_vpvm
+            is_ed2health, is_ed2env, is_pbt, is_vpvb, is_pmt, is_vpvm, hStatement, pStatement , euhStatement
             ) VALUES (
             :requester, :requester, :name,
             :inchi, :inchi_key,
             :smiles, :molecular_formula, :molecular_weight, :metabolomics_wb_id, :nci_code, :nikkaji_number, :pharmgkb_id, :pharos_ligand_id, :rxcui, :unii, :wikidata, :wikipedia, :is_radioactive, :is_antibiotic, :is_antibiotic_precursor, :is_drug, :is_drug_precursor, :is_explosive_precursor, :is_cmr, :is_nano, :is_controlled,
             :cas_number, :ec_number, :iupac_name, :pubchem_cid, :requester, :team, :chebi_id, :chembl_id, :dea_number, :drugbank_id, :dsstox_id, :hmdb_id, :kegg_id,
-            :is_corrosive, :is_serious_health_hazard, :is_explosive, :is_flammable, :is_gas_under_pressure, :is_hazardous2env, :is_hazardous2health, :is_oxidising, :is_toxic, :is_ed2health, :is_ed2env, :is_pbt, :is_pmt, :is_vpvb, :is_vpvm)';
+            :is_corrosive, :is_serious_health_hazard, :is_explosive, :is_flammable, :is_gas_under_pressure, :is_hazardous2env, :is_hazardous2health, :is_oxidising, :is_toxic, :is_ed2health, :is_ed2env, :is_pbt, :is_pmt, :is_vpvb, :is_vpvm, :hStatement, :pStatement , :euhStatement)';
 
         $req = $this->Db->prepare($sql);
         $req->bindParam(':requester', $this->requester->userid, PDO::PARAM_INT);
@@ -402,6 +408,9 @@ final class Compounds extends AbstractRest
         $req->bindParam(':is_pmt', $isPmt, PDO::PARAM_INT);
         $req->bindParam(':is_vpvb', $isVpvb, PDO::PARAM_INT);
         $req->bindParam(':is_vpvm', $isVpvm, PDO::PARAM_INT);
+		$req->bindParam(':hStatement', $hStatement);
+        $req->bindParam(':pStatement', $pStatement);
+        $req->bindParam(':euhStatement', $euhStatement);
 
         try {
             $this->Db->execute($req);

@@ -679,6 +679,9 @@ export function toggleEditCompound(json: object): void {
     'team_name',
     'cas_number',
     'ec_number',
+	'hStatement',
+	'pStatement' ,
+	'euhStatement'
   ];
   textParams.forEach(param => {
     (document.getElementById(`compoundInput-${param}`) as HTMLInputElement).value = json[param];
